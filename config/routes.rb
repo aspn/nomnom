@@ -1,5 +1,13 @@
 Nomnom::Application.routes.draw do
 
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
+  get "signup" => "users#new", :as => "signup"
+  resources :users
+  resources :sessions
+
+  get "sessions/new"
+  get "users/new"
   resources :restaurants
  
   # The priority is based upon order of creation: first created -> highest priority.
