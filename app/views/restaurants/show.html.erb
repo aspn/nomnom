@@ -1,9 +1,7 @@
 <h1> Restaurant Details </h1>
 
-<p><%= link_to "Back to Restaurant Index", restaurants_url %></p>
-
-<%= @restaurant[:name] %>
-<%= @restaurant[:description] %>
-<%= @restaurant[:address] %>
+<p> <%= @restaurant[:name] %> </p>
+<p> Description: <%= @restaurant[:description] %> </p>
+<p> Address: <%= @restaurant[:address] %> </p>
 <%= image_tag (@restaurant[:image]) %>
 
