@@ -1,7 +1,35 @@
-<h1> Restaurant Details </h1>
-
-<p> <%= @restaurant[:name] %> </p>
+<h1> <%= @restaurant[:name] %> </h1>
 <p> Description: <%= @restaurant[:description] %> </p>
 <p> Address: <%= @restaurant[:address] %> </p>
+<p> Capacity: <%= @restaurant[:capacity] %> </p>
 <%= image_tag (@restaurant[:image]) %>
 
+<% if current_user %>
+  <h2>Want to eat here? Make a reservation.</h2>
+  <%= form_for [@restaurant, @reservation] do |f| %>
+
+    <% if @reservation.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h3>
+
+        <ul>
+        <% @reservation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+
+    <% end %>
+    <div class="field">
+      <%= f.label :start_time, "Time?" %>
+      <%= f.select :start_time, @restaurant.available_hours.map {|dt| [format_datetime(dt), dt]} %>
+    </div>
+    <div class="field">
+      <%= f.label :guests %>
+      <%= f.number_field :guests %>
+    </div>
+    <div class="field">
+      <%= f.submit %>
+    </div>
+  <% end %>
+<% end %>

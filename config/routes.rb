@@ -1,5 +1,11 @@
 Nomnom::Application.routes.draw do
 
+  get "reservations/new"
+  get "reservations/edit"
+  get "reservations/update"
+  get "reservations/create"
+  get "reservations/destroy"
+  get "reservations/show"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
@@ -8,7 +14,12 @@ Nomnom::Application.routes.draw do
 
   get "sessions/new"
   get "users/new"
-  resources :restaurants
+
+  root to: 'restaurants#index'
+
+  resources :restaurants do
+    resources :reservations, only: :create
+  end
  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

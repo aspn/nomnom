@@ -6,6 +6,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @reservation = Reservation.new
   end
 
   def new
@@ -39,13 +40,13 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant = Restaurant.find(params[:id])
     @restaurant.destroy
-    redirect_to products_url
+    redirect_to restaurants_url
   end
 
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :description, :address, :image)
+    params.require(:restaurant).permit(:name, :description, :address, :image, :capacity)
   end
 
 end
