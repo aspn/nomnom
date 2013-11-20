@@ -17,7 +17,7 @@ class Restaurant < ActiveRecord::Base
     opening_time = Time.zone.at((opening_time.to_f/reservation_interval).round * reservation_interval )
     opening_time = [opening_time, opening_time.change(hour: open_hour)].max
 
-    closing_time = (opening_time + 7.days).change(hour: close_hour)
+    closing_time = (opening_time + 5.days).change(hour: close_hour)
 
     operating_hours = []
     var_hour = opening_time

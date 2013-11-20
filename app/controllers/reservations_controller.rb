@@ -17,9 +17,9 @@ class ReservationsController < ApplicationController
     @reservation.user = current_user
 
     if @reservation.save
-      redirect_to @reservation.user, :notice => "Reservation Made"
+      redirect_to restaurants_url, :notice => "Reservation Made"
     else
-      render 'restaurants/show'
+      render restaurants_url
     end
   end
 
